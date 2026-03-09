@@ -16,14 +16,13 @@ if (!fs.existsSync(uploadDir)) {
 
 const app = express();
 
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({
-  // origin: ['*'],
-  origin: ['https://sqa-task-re3lvzfsi-zealouszohaib1s-projects.vercel.app/', 'http://localhost:3000', 'http://localhost:5173'],
+  origin: ['https://sqa-task-re3lvzfsi-zealouszohaib1s-projects.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-}));
-app.use(helmet({ crossOriginResourcePolicy: false })); 
+})); 
 app.use(morgan('dev')); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
