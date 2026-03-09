@@ -18,7 +18,19 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: ['https://sqa-task-fe-production.up.railway.app', 'http://localhost:3000', 'http://localhost:5173', 'https://sqa-task-re3lvzfsi-zealouszohaib1s-projects.vercel.app'],
+  origin: function (origin, callback) {
+    const allowed = [
+      'https://sqa-task-fe-production.up.railway.app',
+      'http://localhost:3000',
+      'http://localhost:5173',
+    ];
+    // Allow any Vercel preview URL for this project
+    if (!origin || allowed.includes(origin) || /\.vercel\.app$/.test(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
