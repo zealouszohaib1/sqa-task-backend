@@ -16,13 +16,13 @@ if (!fs.existsSync(uploadDir)) {
 
 const app = express();
 
-app.use(helmet());
 app.use(cors({
   origin: ['https://sqa-task-frontend.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-})); 
+}));
+app.use(helmet({ crossOriginResourcePolicy: false })); 
 app.use(morgan('dev')); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
