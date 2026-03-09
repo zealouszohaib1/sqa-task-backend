@@ -22,7 +22,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-app.use(helmet({ crossOriginResourcePolicy: false })); 
+app.use(helmet()); 
 app.use(morgan('dev')); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
