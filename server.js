@@ -18,7 +18,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: ['https://sqa-task-frontend.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
+  origin: ['https://sqa-task-fe-production.up.railway.app/', 'http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
